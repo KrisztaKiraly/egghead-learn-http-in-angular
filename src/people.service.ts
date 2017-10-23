@@ -10,7 +10,7 @@ export class PeopleService {
   fetchPeople(): Observable<Object> {
     return this.http
       // .get('/assets/data/people.json');
-      .get('/assets/data/unavailable.json');
+      .get('data/unavailable.json');
   }
 
 }
