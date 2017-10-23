@@ -19,7 +19,7 @@ import { PeopleService } from './people.service';
     <hr />
     
     <ul>
-      <li *ngFor="let person of people$ | async">{{ person.name }}</li>
+      <li *ngFor="let person of people">{{ person.name }}</li>
     </ul>
     
     <p *ngIf="message">
@@ -29,7 +29,7 @@ import { PeopleService } from './people.service';
 })
 
 export class AppComponent {
-  people$;
+  people;
   message;
   constructor(private peopleService: PeopleService) {}
 
@@ -50,7 +50,6 @@ export class AppComponent {
           }
         }
       );
-        this.people$ = this.peopleService.fetchPeople();
   }
 }
 
