@@ -1,7 +1,8 @@
-import { BrowserModule } from '@angular/platform-browser';
-import { NgModule, Component } from '@angular/core';
-import { HttpClientModule, HttpErrorResponse } from '@angular/common/http';
-import { AppComponent } from './app.component';
+//our root app component
+import {Component, NgModule, VERSION} from '@angular/core'
+import {BrowserModule} from '@angular/platform-browser';
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+
 import { PeopleService } from './people.service';
 
 @Component({
@@ -18,17 +19,17 @@ import { PeopleService } from './people.service';
     <hr />
     
     <ul>
-      <li *ngFor="let person of people">{{ person.name }}</li>
+      <li *ngFor="let person of people | async">{{ person.name }}</li>
     </ul>
   `,
 })
 
 export class AppComponent {
-  people$;
+  people;
   constructor(private peopleService: PeopleService) {}
 
   fetchPeople() {
-    this.people$ = this.peopleService.fetchPeople();
+    this.people = this.peopleService.fetchPeople();
   }
 }
 
