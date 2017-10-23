@@ -1,7 +1,7 @@
 //our root app component
 import {Component, NgModule, VERSION} from '@angular/core'
 import {BrowserModule} from '@angular/platform-browser';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 
 import { PeopleService } from './people.service';
 
@@ -19,25 +19,40 @@ import { PeopleService } from './people.service';
     <hr />
     
     <ul>
-      <li *ngFor="let person of people$ | async">{{ person.name }}</li>
+      <li *ngFor="let person of people">{{ person.name }}</li>
     </ul>
+    
+    <p *ngIf="message">
+      Check console for Error logs
+      <strong>Error: </strong> {{ message }}
+    </p>
   `,
 })
 
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
 export class AppComponent {
-  people$;
-  constructor(private peopleService: PeopleService){}
+  people;
+  message;
+  constructor(private peopleService: PeopleService) {}
 
   fetchPeople() {
-    this.people$ = this.peopleService.fetchPeople();
+    this.peopleService
+      .fetchPeople()
+      .subscribe(
+        (data) => {
+          this.message = null;
+          this.people = data;
+        },
+        (err: HttpErrorResponse) => {
+          if (err instanceof Error) {
+            // client-side error
+            this.message = `An error occured ${err.error.message}`;
+          } else {
+            this.message = `Backend returned error code ${err.status}, body was: ${err.message}`;
+          }
+        }
+      );
   }
 }
-
 @NgModule({
   declarations: [
     AppComponent
