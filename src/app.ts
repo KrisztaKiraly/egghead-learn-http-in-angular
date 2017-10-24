@@ -1,6 +1,7 @@
 import { Component, NgModule } from '@angular/core';
 import { HttpErrorResponse, HttpClientModule } from '@angular/common/http';
 import { BrowserModule } from '@angular/platform-browser';
+
 import { PeopleService } from './people.service';
 
 @Component({
@@ -15,10 +16,10 @@ import { PeopleService } from './people.service';
     <button (click)="fetchPeople()">Fetch people</button>
     
     <hr />
-
+    
     <pre>
-		  {{ output | json }}
-  	</pre>
+		{{ output | json }}
+	</pre>
   `,
 })
 export class AppComponent {
@@ -33,7 +34,6 @@ export class AppComponent {
       });
   }
 }
-
 
 
 @NgModule({
