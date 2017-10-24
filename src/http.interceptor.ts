@@ -1,14 +1,20 @@
 import { Injectable } from '@angular/core';
+import {
+  HttpInterceptor,
+  HttpRequest,
+  HttpResponse,
+  HttpErrorResponse,
+  HttpHandler,
+  HttpEvent
+} from '@angular/common/http';
 
-import { HttpInterceptor, HttpRequest, HttpErrorResponse, HttpResponse, HttpHandler, HttpEvent } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/do';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 @Injectable()
-export class MyLogHttpInterceptor implements HttpInterceptor {
-
+export class MyHttpLogInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log('processing request', request);
 
@@ -22,16 +28,13 @@ export class MyLogHttpInterceptor implements HttpInterceptor {
         if (ev instanceof HttpResponse) {
           console.log('processing response', ev);
         }
-
-        return ev;
       })
       .catch(response => {
         if (response instanceof HttpErrorResponse) {
-          console.log('processing error response', response);
+          console.log('Processing http error', response);
         }
 
         return Observable.throw(response);
       });
   }
-
 }
