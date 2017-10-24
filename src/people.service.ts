@@ -9,7 +9,7 @@ export class PeopleService {
 
   fetchPeople(): Observable<Object> {
     return this.http
-      .get('/assets/data/people.txt', { responseType: 'text'});
+      .get('data/people.txt', { responseType: 'text'});
   }
 
 }
