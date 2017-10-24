@@ -13,9 +13,28 @@
     <script src="https://unpkg.com/reflect-metadata@0.1.3/Reflect.js"></script>
     <script src="https://unpkg.com/systemjs@0.19.31/dist/system.js"></script>
     <script src="config.js"></script>
+  
     <script>
     System.import('app')
       .catch(console.error.bind(console));
+  </script>
+  
+  <script>
+    // Allows Plunker to display logs in preview panel 
+    // for better in-browser experience
+    var originalConsoleLog = console.log
+    console.log = function () {
+      originalConsoleLog.apply(console, arguments)
+      var args = Array.prototype.slice.call(arguments);
+      var stringifiedArgs = args.join(' ') + '\n';
+      var newDiv = document.createElement("div"); 
+      var newContent = document.createTextNode(stringifiedArgs); 
+      newDiv.appendChild(newContent);
+      document.body.appendChild(newDiv)
+      
+      document.querySelector('h1').style['fontFamily'] = 'monospace';
+      document.querySelector('h1').style['fontSize'] = '1.5em';
+    };
   </script>
   </head>
 

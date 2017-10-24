@@ -17,10 +17,11 @@ import { PeopleService } from './people.service';
   <button (click)="fetchPeople()">Fetch people</button>
 
   <hr />
-
+  <!--
   <pre>
     {{ output | json }}
   </pre>
+  -->
 
   `,
 })
@@ -37,7 +38,11 @@ export class AppComponent {
     this.peopleService
       .fetchPeople()
       .subscribe(data => {
-        console.log(data.headers.get('my-custom-header'));
+        /* Custom headers can't be set in plunker
+           Clone: https://github.com/eggheadio-projects/egghead-learn-http-in-angular/tree/read-custom-headers
+           to see behavior in local development
+        */
+        console.log("Date Header Observerd:",data.headers.get('date'));
         this.output = data;
       });
   }
