@@ -1,14 +1,27 @@
+
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
+
+export interface Person {
+  name: string;
+}
 
 @Injectable()
 export class PeopleService {
 
   constructor(private http: HttpClient) {}
 
-  fetchPeople(): Observable<Object> {
-    return this.http.get('data/people.json');
+  fetchPeople(): Observable<Person> {
+    // const params = new HttpParams()
+    //   .set('id', '2')
+    //   .set('includeName', 'false');
+    // return this.http
+    //   .get<Person>('/api/v1/people', {
+    //     params: params
+    //   });
+    return this.http
+      .post<Person>('/api/v1/people', { name: 'Pete'} );
   }
 
 }

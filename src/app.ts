@@ -1,8 +1,6 @@
-//our root app component
-import {Component, NgModule, VERSION} from '@angular/core'
-import {BrowserModule} from '@angular/platform-browser';
-import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http';
-
+import { Component, NgModule } from '@angular/core';
+import { HttpErrorResponse, HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
 import { PeopleService } from './people.service';
 
 @Component({
@@ -17,26 +15,26 @@ import { PeopleService } from './people.service';
     <button (click)="fetchPeople()">Fetch people</button>
     
     <hr />
-    
-    <ul>
-      <li *ngFor="let person of people$ | async">{{ person.name }}</li>
-    </ul>
+
+    <pre>
+		  {{ output | json }}
+  	</pre>
   `,
 })
-
-@Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
-})
 export class AppComponent {
-  people$;
-  constructor(private peopleService: PeopleService){}
+  output;
+  constructor(private peopleService: PeopleService) {}
 
   fetchPeople() {
-    this.people$ = this.peopleService.fetchPeople();
+    this.peopleService
+      .fetchPeople()
+      .subscribe(data => {
+        this.output = data;
+      });
   }
 }
+
+
 
 @NgModule({
   declarations: [
