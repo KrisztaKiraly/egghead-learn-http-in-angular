@@ -1,11 +1,33 @@
-import { Component } from '@angular/core';
+
+import { Component, NgModule } from '@angular/core';
+import { HttpErrorResponse, HttpClientModule } from '@angular/common/http';
+import { BrowserModule } from '@angular/platform-browser';
+
 import { PeopleService } from './people.service';
-import { HttpEventType, HttpResponse } from '@angular/common/http';
+
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html'
+  selector: 'my-app',
+  template: `
+	<div style="text-align:center">
+	  <h1>
+	    Listen to progress event
+	  </h1>
+	</div>
+
+	<input type="file" #fileUpload>
+	<button (click)="uploadAvatar(fileUpload)">Upload</button>
+
+	<hr />
+
+	<p *ngIf="output">
+	  {{ output }}
+	</p>
+
+  `,
 })
+
+
 export class AppComponent {
   output;
   constructor(private peopleService: PeopleService) {}
@@ -29,3 +51,17 @@ export class AppComponent {
   }
 
 }
+
+
+@NgModule({
+  declarations: [
+    AppComponent
+  ],
+  imports: [
+    BrowserModule,
+    HttpClientModule
+  ],
+  providers: [ PeopleService ],
+  bootstrap: [AppComponent]
+})
+export class AppModule { }
