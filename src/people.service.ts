@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 
 export interface Person {
   name: string;
@@ -13,7 +13,7 @@ export class PeopleService {
 
   fetchPeople(): Observable<Person[]> {
     return this.http
-      .get<Person[]>('/api/v1/people');
+      .get<Person[]>('data/people.json');
   }
 
 }
