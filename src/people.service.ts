@@ -13,7 +13,7 @@ export class PeopleService {
 
   fetchPeople(): Observable<Person[]> {
     return this.http
-      .get<Person[]>('/assets/data/people.json');
+      .get<Person[]>('data/people.json');
   }
 
 }
