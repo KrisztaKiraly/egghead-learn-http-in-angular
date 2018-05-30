@@ -14,7 +14,7 @@ export class PeopleService {
   uploadAvatar(data): Observable<HttpEvent<Object>> {
     const req = new HttpRequest(
       'POST',
-      'https://reqres.in/api/users/1',
+      '/api/v1/people/123/avatar',
       data,
       { reportProgress: true }
     );
