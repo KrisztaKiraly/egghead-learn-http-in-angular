@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-// v4.3.1
+
 import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
