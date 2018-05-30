@@ -6,7 +6,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
 // respond with "hello world" when a GET request is made to the homepage
-app.get('data/people.json', function (req, res) {
+app.get('/api/v1/people', function (req, res) {
   res.set('my-custom-header', 'Angular rocks');
   res.json([
     {
@@ -18,7 +18,7 @@ app.get('data/people.json', function (req, res) {
   ]);
 });
 
-app.post('data/people.json', function (req, res) {
+app.post('/api/v1/people', function (req, res) {
   res.json(req.body);
 });
 

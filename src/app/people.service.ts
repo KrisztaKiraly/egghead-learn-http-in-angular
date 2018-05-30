@@ -13,6 +13,7 @@ export class PeopleService {
 
   fetchPeople(): Observable<HttpResponse<Person>> {
     return this.http
-      .get<Person>('data/people.json', { observe: 'response'});
+      .get<Person>('/api/v1/people', { observe: 'response'});
   }
+
 }
