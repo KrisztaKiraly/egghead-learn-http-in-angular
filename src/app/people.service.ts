@@ -9,7 +9,7 @@ export class PeopleService {
 
   fetchPeople(): Observable<Object> {
     return this.http
-      .get('data/people.json', {
+      .get('/assets/data/people.json', {
         headers: new HttpHeaders().set('app-language', 'it')
       });
   }
